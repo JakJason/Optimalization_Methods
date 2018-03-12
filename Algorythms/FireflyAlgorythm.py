@@ -9,14 +9,14 @@ class FireflyAlgorythm(GenericAlgorythm):
 
     def __init__(self):
 
-        self.x_min = -1
-        self.x_max = 3
-        self.y_min = -2
-        self.y_max = 4
-        self.steps = 41
-        self.n_flies = 20
+        self.x_min = -3
+        self.x_max = 5
+        self.y_min = -3
+        self.y_max = 5
+        self.steps = 81
+        self.n_flies = 80
         self.delta = -2.4
-        self.rand_wander = 0.1
+        self.rand_wander = 1.0
 
         self.fig, self.ax = plt.subplots()
         self.back = None
@@ -53,7 +53,7 @@ class FireflyAlgorythm(GenericAlgorythm):
         Z = z.reshape(self.steps, self.steps)
 
         for i in range(0, self.n_flies):
-            self.flies.append(Firefly(self.x_min, self.x_max, self.y_min, self.y_max, ))
+            self.flies.append(Firefly(self.x_min, self.x_max, self.y_min, self.y_max, self.rand_wander))
 
         self.back = plt.pcolormesh(X, Y, Z)
         self.ln, = plt.plot([fly.x for fly in self.flies], [fly.y for fly in self.flies], 'wo',
@@ -68,25 +68,27 @@ class FireflyAlgorythm(GenericAlgorythm):
 
 class Firefly:
 
-    def __init__(self, x_min, x_max, y_min, y_max):
+    def __init__(self, x_min, x_max, y_min, y_max, r):
         self.x = random.uniform(x_min, x_max)
         self.y = random.uniform(y_min, y_max)
         self.lightness = ((1 - self.x) ** 2 + 100 * (self.y - self.x ** 2) ** 2)
-        self.rand_wander = 0.2
+        self.rand_wander = r
 
     def adjust_lightness(self):
         self.lightness = ((1 - self.x) ** 2 + 100 * (self.y - self.x ** 2) ** 2)
 
     def move_to(self, other_firefly):
-        self.x = self.x + (other_firefly.x - self.x) * random.gauss(0, self.rand_wander)
-        self.y = self.y + (other_firefly.y - self.y) * random.gauss(0, self.rand_wander)
+        r = random.gauss(0, self.rand_wander)
+        self.x = self.x + (other_firefly.x - self.x) * r
+        self.y = self.y + (other_firefly.y - self.y) * r
 
     def dist(self, other_firefly):
         return np.sqrt((other_firefly.x - self.x)**2 + (other_firefly.y - self.y)**2)
 
     def move_rand(self):
-        self.x = self.x + random.gauss(0, self.rand_wander)
-        self.y = self.y + random.gauss(0, self.rand_wander)
+        r = random.gauss(-self.rand_wander, self.rand_wander)
+        self.x = self.x + r
+        self.y = self.y + r
 
 if __name__ == "__main__":
     FfA = FireflyAlgorythm()
