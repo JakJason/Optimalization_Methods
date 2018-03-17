@@ -1,11 +1,11 @@
-from Algorythms.GenericAlgorythm import GenericAlgorythm
+from Algorythms.GenericAlgorithm import GenericAlgorithm
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import random
 
 
-class FireflyAlgorythm(GenericAlgorythm):
+class FireflyAlgorithm(GenericAlgorithm):
 
     def __init__(self):
 
@@ -16,7 +16,7 @@ class FireflyAlgorythm(GenericAlgorythm):
         self.steps = 81
         self.n_flies = 80
         self.delta = -2.4
-        self.rand_wander = 1.0
+        self.rand_wander = 0.6
 
         self.fig, self.ax = plt.subplots()
         self.back = None
@@ -91,6 +91,6 @@ class Firefly:
         self.y = self.y + r
 
 if __name__ == "__main__":
-    FfA = FireflyAlgorythm()
+    FfA = FireflyAlgorithm()
     FfA.start()
     plt.show()

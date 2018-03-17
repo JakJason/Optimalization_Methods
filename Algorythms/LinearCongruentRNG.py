@@ -1,9 +1,9 @@
-from Algorythms.GenericAlgorythm import GenericAlgorythm
+from Algorythms.GenericAlgorithm import GenericAlgorithm
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
 
-class LinearCongruentRNG(GenericAlgorythm):
+class LinearCongruentRNG(GenericAlgorithm):
 
     def __init__(self):
 
