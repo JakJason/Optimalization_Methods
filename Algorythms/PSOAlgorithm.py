@@ -13,7 +13,7 @@ class PSOAlgorithm(GenericAlgorithm):
         self.y_min = -3
         self.y_max = 5
         self.steps = 81
-        self.n_particles = 80
+        self.n_particles = 800
 
         self.best_x = 0
         self.best_y = 0
@@ -29,7 +29,7 @@ class PSOAlgorithm(GenericAlgorithm):
             particle.update_velocity(self.best_x, self.best_y)
             particle.move()
             particle.check_best()
-            if particle.f(particle.x, particle.y) < self.function(self.best_x, self.best_y):
+            if particle.f(particle.x, particle.y) <= self.function(self.best_x, self.best_y):
                 self.best_x = particle.x
                 self.best_y = particle.y
 
@@ -77,16 +77,16 @@ class Particle:
         self.y = random.uniform(y_min, y_max)
         self.best_x = self.x
         self.best_y = self.y
-        self.v_x = random.uniform(-(x_max - x_min), (x_max - x_min))
-        self.v_y = random.uniform(-(y_max - y_min), (y_max - y_min))
+        self.v_x = random.uniform(-(x_max - x_min)/2, (x_max - x_min)/2)
+        self.v_y = random.uniform(-(y_max - y_min)/2, (y_max - y_min)/2)
         self.f = f
 
     def update_velocity(self, global_best_x, global_best_y):
         r1 = random.uniform(0, 1)
         r2 = random.uniform(0, 1)
 
-        self.v_x = 0.75 * self.v_x + 1.32 * r1 * (self.best_x - self.x) + 1.32 * r2 * (global_best_x - self.x)
-        self.v_y = 0.75 * self.v_y + 1.32 * r1 * (self.best_y - self.y) + 1.32 * r2 * (global_best_y - self.x)
+        self.v_x = 0.3 * self.v_x + 0.7 * r1 * (self.best_x - self.x) + 1.9 * r2 * (global_best_x - self.x)
+        self.v_y = 0.3 * self.v_y + 0.7 * r1 * (self.best_y - self.y) + 1.9 * r2 * (global_best_y - self.y)
 
     def move(self):
         self.x = self.x + self.v_x
