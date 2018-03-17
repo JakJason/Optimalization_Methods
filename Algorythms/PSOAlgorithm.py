@@ -14,6 +14,8 @@ class PSOAlgorithm(GenericAlgorithm):
         self.y_max = 5
         self.steps = 81
         self.n_particles = 800
+        self.inertia = 0.7
+        self.correction = 1.4
 
         self.best_x = 0
         self.best_y = 0
@@ -26,7 +28,7 @@ class PSOAlgorithm(GenericAlgorithm):
     def update(self, frame):
 
         for particle in self.particles:
-            particle.update_velocity(self.best_x, self.best_y)
+            particle.update_velocity(self.best_x, self.best_y, self.inertia, self.correction)
             particle.move()
             particle.check_best()
             if particle.f(particle.x, particle.y) <= self.function(self.best_x, self.best_y):
@@ -81,12 +83,14 @@ class Particle:
         self.v_y = random.uniform(-(y_max - y_min)/2, (y_max - y_min)/2)
         self.f = f
 
-    def update_velocity(self, global_best_x, global_best_y):
+    def update_velocity(self, global_best_x, global_best_y, inertia, correction):
         r1 = random.uniform(0, 1)
         r2 = random.uniform(0, 1)
 
-        self.v_x = 0.3 * self.v_x + 0.7 * r1 * (self.best_x - self.x) + 1.9 * r2 * (global_best_x - self.x)
-        self.v_y = 0.3 * self.v_y + 0.7 * r1 * (self.best_y - self.y) + 1.9 * r2 * (global_best_y - self.y)
+        self.v_x = inertia * self.v_x + correction * r1 * (self.best_x - self.x) + \
+                   correction * r2 * (global_best_x - self.x)
+        self.v_y = inertia * self.v_y + correction * r1 * (self.best_y - self.y) + \
+                   correction * r2 * (global_best_y - self.y)
 
     def move(self):
         self.x = self.x + self.v_x
