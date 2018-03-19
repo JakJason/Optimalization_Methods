@@ -7,15 +7,15 @@ import random
 
 class PSOAlgorithm(GenericAlgorithm):
 
-    def __init__(self):
-        self.x_min = -3
-        self.x_max = 5
-        self.y_min = -3
-        self.y_max = 5
-        self.steps = 81
-        self.n_particles = 800
-        self.inertia = 0.7
-        self.correction = 1.4
+    def __init__(self, list):
+        self.x_min = list[0]
+        self.x_max = list[1]
+        self.y_min = list[2]
+        self.y_max = list[3]
+        self.steps = list[4]
+        self.n_particles = list[5]
+        self.inertia = list[6]
+        self.correction = list[7]
 
         self.best_x = 0
         self.best_y = 0
@@ -103,7 +103,7 @@ class Particle:
 
 
 if __name__ == "__main__":
-    PSO = PSOAlgorithm()
+    PSO = PSOAlgorithm([-5, 5, -5, 5, 1001, 100, 0.7, 1.4])
     PSO.start()
     plt.show()
 

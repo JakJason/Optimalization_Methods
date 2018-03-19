@@ -7,15 +7,15 @@ import random
 
 class FireflyAlgorithm(GenericAlgorithm):
 
-    def __init__(self):
-        self.x_min = -3
-        self.x_max = 5
-        self.y_min = -3
-        self.y_max = 5
-        self.steps = 81
-        self.n_flies = 80
-        self.delta = -0.2
-        self.rand_wander = 0.6
+    def __init__(self, list):
+        self.x_min = list[0]
+        self.x_max = list[1]
+        self.y_min = list[2]
+        self.y_max = list[3]
+        self.steps = list[4]
+        self.n_flies = list[5]
+        self.delta = list[6]
+        self.rand_wander = list[7]
 
         self.fig, self.ax = plt.subplots()
         self.back = None
@@ -24,8 +24,6 @@ class FireflyAlgorithm(GenericAlgorithm):
         super().__init__()
 
     def update(self, frame):
-
-        self.flies.sort(key=lambda f: f.lightness, reverse=True)
         atr = None
         for fly in self.flies:
             if fly.lightness == max(f.lightness for f in self.flies):
@@ -92,6 +90,6 @@ class Firefly:
 
 
 if __name__ == "__main__":
-    FfA = FireflyAlgorithm()
+    FfA = FireflyAlgorithm([-3, 5, -3, 5, 81, 100, -0.2, 0.6])
     FfA.start()
     plt.show()

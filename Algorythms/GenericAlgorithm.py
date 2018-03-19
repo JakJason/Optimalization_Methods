@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class GenericAlgorithm(ABC):
+class GenericAlgorithm(ABC, list):
 
     def __init__(self):
 

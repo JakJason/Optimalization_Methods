@@ -5,12 +5,12 @@ from matplotlib.animation import FuncAnimation
 
 class LinearCongruentRNG(GenericAlgorithm):
 
-    def __init__(self):
+    def __init__(self, list):
 
-        self.mod = 1111111
-        self.a = 3735
-        self.c = 17732
-        self.seed = 0
+        self.mod = list[0]
+        self.a = list[1]
+        self.c = list[2]
+        self.seed = list[3]
 
         self.fig, self.ax = plt.subplots()
         self.xdata, self.ydata = [], []
@@ -22,11 +22,15 @@ class LinearCongruentRNG(GenericAlgorithm):
     def update(self, frame):
 
         if frame == 0:
-            self.xdata.append(self.seed % self.mod)
+            self.xdata.append((self.seed % self.mod))# / self.mod)
+            print("X: "+((self.seed % self.mod)).__str__())
         else:
-            self.xdata.append((self.ydata[frame-1]*self.a + self.c) % self.mod)
+            self.xdata.append(((self.ydata[frame-1]*self.a + self.c) % self.mod) / self.mod)
+            print("X: "+(((self.ydata[frame-1]*self.a + self.c) % self.mod)).__str__())
 
-        self.ydata.append((self.xdata[frame]*self.a + self.c) % self.mod)
+
+        self.ydata.append(((self.xdata[frame]*self.a + self.c) % self.mod))# / self.mod)
+        print("Y: " + (((self.xdata[frame]*self.a + self.c) % self.mod)).__str__())
 
         self.ln.set_data(self.xdata, self.ydata)
 
@@ -44,6 +48,6 @@ class LinearCongruentRNG(GenericAlgorithm):
 
 if __name__ == "__main__":
 
-    RNG = LinearCongruentRNG()
+    RNG = LinearCongruentRNG([1,1,1,1])
     RNG.start()
     plt.show()
