@@ -69,7 +69,8 @@ class PSOAlgorithm(GenericAlgorithm):
         self.animation = FuncAnimation(self.fig, self.update, frames=None, init_func=self.init, blit=True)
 
     def function(self, x, y):
-        return (1 - x) ** 2 + 100 * (y - x ** 2) ** 2
+    ##    return (1 - x) ** 2 + 100 * (y - x ** 2) ** 2
+        return (x ** 2 + x ** 2 + 25 * (np.sin(x) ** 2 + np.sin(y) ** 2))
 
 
 class Particle:
