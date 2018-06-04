@@ -61,7 +61,7 @@ class FireflyAlgorithm(GenericAlgorithm):
 
     def function(self, x, y):
     ##    return ((1 - x) ** 2 + 100 * (y - x ** 2) ** 2)
-        return (x**2 + x**2 + 25*(np.sin(x)**2 + np.sin(y)**2))
+        return (x**2 + y**2 + 25*(np.sin(x)**2 + np.sin(y)**2))
 
 
 class Firefly:
