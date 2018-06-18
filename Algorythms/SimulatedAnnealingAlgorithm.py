@@ -148,7 +148,7 @@ class AnnealingPanel:
         self.N_Entry.grid(row=5, column=1, sticky="nsew")
 
         self.Temperature = StringVar(self.Frame)
-        self.Temperature_Label = Label(self.Frame, anchor='nw', justify='left', text="Delta")
+        self.Temperature_Label = Label(self.Frame, anchor='nw', justify='left', text="Temperature")
         self.Temperature_Label.grid(row=6, column=0, sticky="nsew")
         self.Temperature_Entry = Entry(self.Frame, textvariable=self.Temperature)
         self.Temperature.set(5000)
@@ -163,7 +163,7 @@ class AnnealingPanel:
                                'Eggcrate function')
         self.Menu.grid(row=7, column=1, sticky="nsew")
 
-        self.Create_button = Button(self.Frame, text='Load Algorithm', state=NORMAL, width=10, height=2,
+        self.Create_button = Button(self.Frame, text='Start Algorithm', state=NORMAL, width=10, height=2,
                                     command=self.Start_Algorytm)
         self.Create_button.grid(row=8, column=0, columnspan=2, sticky="nsew")
         self.Clear_button = Button(self.Frame, text='Clear Algorithm', state=NORMAL, width=10, height=2,

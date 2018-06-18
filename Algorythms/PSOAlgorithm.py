@@ -183,7 +183,7 @@ class PSOPanel:
                                'Eggcrate function')
         self.Menu.grid(row=8, column=1, sticky="nsew")
 
-        self.Create_button = Button(self.Frame, text='Load Algorithm', state=NORMAL, width=10, height=2,
+        self.Create_button = Button(self.Frame, text='Start Algorithm', state=NORMAL, width=10, height=2,
                                     command=self.Start_Algorytm)
         self.Create_button.grid(row=9, column=0, columnspan=2, sticky="nsew")
         self.Clear_button = Button(self.Frame, text='Clear Algorithm', state=NORMAL, width=10, height=2,
